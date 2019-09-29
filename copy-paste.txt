@@ -1,0 +1,41 @@
+//отобразить все
+MATCH (n) RETURN n
+
+ //drop table
+ MATCH (n) DELETE n
+
+//drop table CASCADE
+MATCH (n) DETACH DELETE n
+
+//ссылка на док
+https://neo4j.com/docs/cypher-manual/current/clauses/match/#get-all-nodes
+
+//Что то
+Graph
+12345
+
+//Create
+CREATE (g1:Group { name: "ROOT" })
+CREATE (g2:Group { name: "2019/09/27" })
+CREATE (g3:Group { name: "2019/09/25" })
+CREATE (g4:Group { name: "2019/09/26" })
+
+//Relate
+MATCH (g1:Group),(g2:Group)
+WHERE g1.name = "ROOT" AND g2.name <>"ROOT"
+CREATE (g1)-[:PARENT]->(g2)
+return g1,g2
+
+
+
+
+MATCH (g1:Group),(g2:Group)
+WHERE g1.name = "ROOT" AND g2.name = "2019/09/27"
+return g1,g2
+
+MATCH (g1:Group),(g2:Group)
+WHERE g1.name = "ROOT" AND g2.name = "2019/09/27"
+CREATE (g1)-[:PARENT]->(g2)
+
+MATCH (Group) WHERE Group.name="ROOT" RETURN Group
+

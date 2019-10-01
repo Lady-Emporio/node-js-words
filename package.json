@@ -1,0 +1,24 @@
+{
+  "name": "node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lady-Emporio/node-js-words.git"
+  },
+  "author": "Lady",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Lady-Emporio/node-js-words/issues"
+  },
+  "homepage": "https://github.com/Lady-Emporio/node-js-words#readme",
+  "dependencies": {
+    "ejs": "^2.7.1",
+    "express": "^4.17.1",
+    "neode": "^0.3.3"
+  }
+}

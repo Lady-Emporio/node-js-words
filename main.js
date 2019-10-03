@@ -23,9 +23,12 @@ const Neode = require('neode')
 const Urls = require('./urls');
 const express = require('express')
 const ejs = require('ejs')
-// const instance = new Neode(ENV.get("neo4j_host"),ENV.get("neo4j_username"),ENV.get("neo4j_password"));
+const instance = new Neode(ENV.get("neo4j_host"),ENV.get("neo4j_username"),ENV.get("neo4j_password"));
 
+const Orm=require('./models');
+const orm=new Orm(instance);
 
+orm.getALlWords();
 // instance.model('Word', {
 //     word_id: {
 //         primary: true,

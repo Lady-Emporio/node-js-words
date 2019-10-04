@@ -1,4 +1,4 @@
-
+const l=(...x)=>{console.log(...x);}
 let prototypeWord={
     word_id: {
         primary: true,
@@ -34,31 +34,21 @@ class Orm{
         console.log("Model not drop.");
     };
 
-    createWord(eng,ru,env_value,example){
-        this.stuff.create('Word', {
+    async createWord(eng,ru,env_value,example){
+        let some=await this.stuff.create('Word', {
             eng: eng,
             ru: ru,
             env_value : env_value,
             example:example
             })
+        let id=some.id();
+        return id;
     };
     
-    getALlWords(){
-        this.stuff.all('Word').then(collection => {
-            console.log("Begin",new Date());
-            //console.log(collection.get(0).get('name')); // 'Adam'
-        });
-
-        console.log("getALlWords end",new Date());
+    async getALlWords(){
+        let promise =this.stuff.all('Word')
+        let result=await promise;
+        return result;
     };
-    
-    // var seeAllWords=()=>{
-//     instance.all('Word')
-//     .then(collection => {
-//         l(collection);
-//         //console.log(collection.get(0).get('name')); // 'Adam'
-//     })
-// }
-
 }
 module.exports=Orm;

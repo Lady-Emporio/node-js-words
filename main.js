@@ -28,43 +28,17 @@ const instance = new Neode(ENV.get("neo4j_host"),ENV.get("neo4j_username"),ENV.g
 const Orm=require('./models');
 const orm=new Orm(instance);
 
-orm.getALlWords();
-// instance.model('Word', {
-//     word_id: {
-//         primary: true,
-//         type: 'uuid',
-//         required: true, // Creates an Exists Constraint in Enterprise mode
-//     },
-//     // payroll: {
-//     //     type: 'number',
-//     //     unique: 'true', // Creates a Unique Constraint
-//     // },
-//     eng: {
-//         type: 'string',
-//         index: true, 
-//     },
-//     ru: {
-//         type: 'string',
-//         index: true,
-//     },
-//     env_value: {
-//         type: 'string',
-//     },
-// });
-// var createWord=(eng,ru,env_value)=>{
-//     instance.create('Word', {
-//         eng       : eng,
-//         ru        : ru,
-//         env_value : env_value
-//     })
+
+
+// async function mainTest(){
+//     //let collection= await orm.getALlWords();
+//     l("my start")
+//     let id=await orm.createWord("puppy eng","ru puppy","value puppy","run puppy");
+//     l(id);
+//     l("my end")
 // }
-// var seeAllWords=()=>{
-//     instance.all('Word')
-//     .then(collection => {
-//         l(collection);
-//         //console.log(collection.get(0).get('name')); // 'Adam'
-//     })
-// }
+// mainTest();
+
 var app = express()
 const url=new Urls(app);
 
@@ -78,10 +52,10 @@ app.set('view engine', 'ejs');
 // })
 
 
-var listener=app.listen(ENV.get("express_port"),ENV.get("express_host"),
-()=>{
-    let address=listener.address();
-    l(`Server on ${address.address}:${address.port} ${address.family}`);}
-    )
-l("end");
+// var listener=app.listen(ENV.get("express_port"),ENV.get("express_host"),
+// ()=>{
+//     let address=listener.address();
+//     l(`Server on ${address.address}:${address.port} ${address.family}`);}
+//     )
+// l("end");
 

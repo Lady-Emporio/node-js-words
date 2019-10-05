@@ -7,6 +7,9 @@ MATCH (n) RETURN n
 //drop table CASCADE
 MATCH (n) DETACH DELETE n
 
+//получить по <id>
+MATCH (p:Group) WHERE ID(p)=118 RETURN p
+
 //ссылка на док
 https://neo4j.com/docs/cypher-manual/current/clauses/match/#get-all-nodes
 

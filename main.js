@@ -24,20 +24,24 @@ const Urls = require('./urls');
 const express = require('express')
 const ejs = require('ejs')
 const instance = new Neode(ENV.get("neo4j_host"),ENV.get("neo4j_username"),ENV.get("neo4j_password"));
-
 const Orm=require('./models');
 const orm=new Orm(instance);
 
 
 
-// async function mainTest(){
-//     //let collection= await orm.getALlWords();
-//     l("my start")
-//     let id=await orm.createWord("puppy eng","ru puppy","value puppy","run puppy");
-//     l(id);
-//     l("my end")
-// }
-// mainTest();
+async function mainTest(){
+    //let collection= await orm.getALlWords();
+    l("my start")
+
+    //let id= await orm.createGroup("First group");
+    //l(id)
+    let collection=await instance.findById(orm.nameGroup, 97);
+    l(collection.name)
+    l(collection)
+    
+    l("my end")
+}
+mainTest();
 
 var app = express()
 const url=new Urls(app);
@@ -45,17 +49,10 @@ const url=new Urls(app);
 app.set('views', __dirname + '/templates');
 app.set('view engine', 'ejs');
 
-
-
-// app.get('/', function (req, res) {
-//     res.render("index", {});
-// })
-
-
-// var listener=app.listen(ENV.get("express_port"),ENV.get("express_host"),
-// ()=>{
-//     let address=listener.address();
-//     l(`Server on ${address.address}:${address.port} ${address.family}`);}
-//     )
-// l("end");
+var listener=app.listen(ENV.get("express_port"),ENV.get("express_host"),
+()=>{
+    let address=listener.address();
+    l(`Server on ${address.address}:${address.port} ${address.family}`);}
+    )
+l("end");
 

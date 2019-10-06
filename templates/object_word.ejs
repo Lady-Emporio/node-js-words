@@ -1,0 +1,32 @@
+<!Doctype html>
+<html>
+<head>
+<style>
+.field {clear:both; text-align:right;}
+label {float:left;padding-right:10px;}
+.main {float:left}
+</style>
+</head>
+<body>
+<% if(key) { %>
+<h1>Word: <%=key%></h1>
+<% } else { %>
+<h1>New Word</h1>
+<% } %>
+
+
+<form>
+<div class="main">
+<% properties.forEach(function(property ) { %>
+
+<div class="field">
+	<label for="<%=property.name%>"><%=property.name%></label>
+	<input name="<%=property.name%>" id="<%=property.name%>" value="<%=property.value%>">
+</div>
+
+<% }); %>
+</div>
+
+</form>
+</body>
+</html>

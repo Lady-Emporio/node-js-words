@@ -1,12 +1,14 @@
 
-var views = require('./views');
+const views = require('./views');
+const ReqType={GET:"GET",POST:"POST",ALL:"ALL"}
 // 1 arg=path
 // 2 arg=views
 // 3 arg=type
-var urls=[
-    ["/",views.index,"GET"],
-    ["/qw/",views.NotKnowAsSay1,"POST"],
-    ["/2",views.NotKnowAsSay2,"ALL"],
+const urls=[
+    ["/",views.index,ReqType.ALL],
+    ["/word/:wordId([0-9]{1,})/",views.Word_FormObject,ReqType.ALL],
+    ["/group/:groupId([0-9]{1,})/",views.Group_FormObject,ReqType.ALL],
+    ["*",views.e404,"ALL"]
 ]
 
 class Urls{
@@ -17,13 +19,13 @@ class Urls{
             let view=url[1];
             let typeRequest=url[2];
             switch(typeRequest){
-                case "GET":
+                case ReqType.GET:
                     app.get(path,view);
                     break;
-                case "POST":
+                case ReqType.POST:
                     app.post(path,view);
                     break;
-                case "ALL":
+                case ReqType.ALL:
                     app.all(path,view);
                     break;
             }

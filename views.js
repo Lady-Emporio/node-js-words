@@ -1,16 +1,62 @@
+const l=(...x)=>{console.log(...x);}
+const Neode = require('neode')
+
+const ENV=require(__dirname+"/const");
+const instance = new Neode(ENV.get("neo4j_host"),ENV.get("neo4j_username"),ENV.get("neo4j_password"));
+const Orm=require('./models');
+const orm=new Orm(instance);
+
 
 function index(req, res) {
     res.render("index", {});
 }
-function NotKnowAsSay1(req, res) {
-    res.end("Test function1");
+
+async function Word_FormObject(req, res) {
+    let wordId=req.params.wordId;
+    let word= await orm.stuff.model(orm.nameWord).findById(wordId);
+    let arrayWordTableProperties=orm.getProperties(orm.nameWord);
+    var properties=[];
+    if(false==word){//not exist
+        for(let key of arrayWordTableProperties){
+            properties.push(
+                {name:key,value:""}
+            );
+        }
+        res.render("object_word", {properties:properties,key:null});
+        return;
+    }
+
+    let object_properties=word.properties()
+    for(let key of arrayWordTableProperties){
+        properties.push(
+            {name:key,value:object_properties[key]}
+        );
+    }
+    console.log(properties)
+    res.render("object_word", {properties:properties,key:wordId});
 }
-function NotKnowAsSay2(req, res) {
-    res.end("Test function2");
+
+function Group_FormObject(req, res) {
+    res.end("Group_FormObject");
+}
+
+function e404(req, res) {
+    let params={
+        path : req.path,
+        method: req.method,
+        protocol:req.protocol,  
+        params:req.params,
+        headers:req.headers,
+        query:req.query,
+    }
+    jsonParams=JSON.stringify(params,null,"\t");
+    let return_text="Page not found\n"+jsonParams;
+    res.end(return_text);
 }
 module.exports = {
     index: index,
-    NotKnowAsSay1:NotKnowAsSay1,
-    NotKnowAsSay2:NotKnowAsSay2,
+    Word_FormObject:Word_FormObject,
+    Group_FormObject:Group_FormObject,
+    e404:e404,
 };
     

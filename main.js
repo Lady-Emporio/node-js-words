@@ -10,6 +10,9 @@ const ejs = require('ejs')
 
 var app = express()
 
+app.use(express.json()) // for parsing application/json
+app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+
 var consoleLog = async function (req, res, next) {
     let log=new Date().toString()+" | "+req.path;
     l(log)

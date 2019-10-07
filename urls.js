@@ -6,7 +6,8 @@ const ReqType={GET:"GET",POST:"POST",ALL:"ALL"}
 // 3 arg=type
 const urls=[
     ["/",views.index,ReqType.ALL],
-    ["/word/:wordId([0-9]{1,})/",views.Word_FormObject,ReqType.ALL],
+    ["/word/:wordId([0-9]{1,})/",views.Word_FormObject,ReqType.GET],
+    ["/word/save/",views.Word_Save,ReqType.POST],
     ["/group/:groupId([0-9]{1,})/",views.Group_FormObject,ReqType.ALL],
     ["*",views.e404,"ALL"]
 ]

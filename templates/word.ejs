@@ -97,25 +97,25 @@ h1{
 <body translate="no">
 <h1>Word: <%=values.eng%>    (<%=key%>)</h1>
 <div class="container">
-<form>
+<form action="/word/save/" method="post">
 <ul class="flex-outer">
 <li>
 <label for="eng">Eng:</label>
-<input type="text" id="eng" value="<%=values.eng%>">
+<input type="text" id="eng" value="<%=values.eng%>" name="eng">
 </li>
 <li>
 <label for="ru">Ru:</label>
-<input type="text" id="ru" value="<%=values.ru%>">
+<input type="text" id="ru" value="<%=values.ru%>" name="ru">
 </li>
 <li>
 <label for="env_value">Eng value:</label>
-<input type="text" id="env_value" value="<%=values.env_value%>">
+<input type="text" id="env_value" value="<%=values.env_value%>" name="env_value">
 </li>
 <li>
 <label for="example">Example:</label>
-<textarea rows="6" id="example" ><%=values.example%></textarea>
+<textarea rows="6" id="example" name="example"><%=values.example%></textarea>
 </li>
-
+<li><span><%=values.date_create%></span></li>
 <li>
 <button type="submit"><%=submitText%></button>
 </li>

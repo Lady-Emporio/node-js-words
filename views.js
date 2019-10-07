@@ -28,6 +28,25 @@ async function Word_FormObject(req, res) {
     });
 }
 
+async function Word_Save(req,res){
+    if( undefined==req.body.eng ||
+        undefined==req.body.ru,
+        undefined==req.body.env_value,
+        undefined==req.body.example
+        ){ 
+            res.status(452).json({ message: 'Bad form' });
+            return;
+        }
+    let id=await orm.createWord(
+        req.body.eng,
+        req.body.ru,
+        req.body.env_value,
+        req.body.example);
+    res.redirect(`../${id}`);
+    // console.log(req.body)
+    // res.json(req.body)
+}
+
 function Group_FormObject(req, res) {
     res.end("Group_FormObject");
 }
@@ -50,5 +69,6 @@ module.exports = {
     Word_FormObject:Word_FormObject,
     Group_FormObject:Group_FormObject,
     e404:e404,
+    Word_Save:Word_Save,
 };
     

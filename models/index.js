@@ -14,9 +14,6 @@ class Orm{
         this.stuff.model(this.nameGroup,model_Group);
         console.log("Model not drop.");
     };
-    getProperties(table){
-        return Array.from( this.stuff.model(table).properties().keys());
-    };
 
     async createWord(eng,ru,env_value,example){
         let some=await this.stuff.create(this.nameWord, {

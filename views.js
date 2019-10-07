@@ -14,26 +14,18 @@ function index(req, res) {
 async function Word_FormObject(req, res) {
     let wordId=req.params.wordId;
     let word= await orm.stuff.model(orm.nameWord).findById(wordId);
-    let arrayWordTableProperties=orm.getProperties(orm.nameWord);
-    var properties=[];
-    if(false==word){//not exist
-        for(let key of arrayWordTableProperties){
-            properties.push(
-                {name:key,value:""}
-            );
-        }
-        res.render("object_word", {properties:properties,key:null});
-        return;
+    var values={
+        eng: (word) ? word.get("eng") : "",
+        ru: (word) ? word.get("ru") : "",
+        env_value: (word) ? word.get("env_value") : "",
+        example: (word) ? word.get("example") : "",
+        date_create: (word) ? word.get("date_create") : "",
     }
-
-    let object_properties=word.properties()
-    for(let key of arrayWordTableProperties){
-        properties.push(
-            {name:key,value:object_properties[key]}
-        );
-    }
-    console.log(properties)
-    res.render("object_word", {properties:properties,key:wordId});
+    res.render("word", {
+        values:values,
+        key:(word) ? wordId : null,
+        submitText:(word) ? "Save": "Create",
+    });
 }
 
 function Group_FormObject(req, res) {

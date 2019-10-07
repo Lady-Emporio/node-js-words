@@ -6,6 +6,8 @@ class CONSTS {
             "neo4j_password":"12345",
             "express_port":7899,
             "express_host":"localhost",
+            "admin_name":"Vasa",
+            "admin_password":"12345",
         };
     }
     get(name){

@@ -8,6 +8,7 @@ const urls=[
     ["/",views.index,ReqType.ALL],
     ["/word/:wordId([0-9]{1,})/",views.Word_FormObject,ReqType.GET],
     ["/word/save/",views.Word_Save,ReqType.POST],
+    ["/word/",views.Word_List,ReqType.GET],
     ["/group/:groupId([0-9]{1,})/",views.Group_FormObject,ReqType.ALL],
     ["*",views.e404,"ALL"]
 ]

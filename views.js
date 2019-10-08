@@ -27,6 +27,21 @@ async function Word_FormObject(req, res) {
         submitText:(word) ? "Save": "Create",
     });
 }
+async function Word_List(req,res){
+    let text=`
+    MATCH (n:Word) RETURN n
+    ORDER BY n.eng
+    LIMIT 30
+    `
+    words=await orm.stuff.cypher(text);
+
+    let array=[]
+    for(let i=0; i!=words.records.length;++i){
+        wordObject=words.records[i].get("n").properties;
+        array.push(wordObject);
+    }
+    res.render("word_list", {words:array});
+}
 
 async function Word_Save(req,res){
     if( undefined==req.body.eng ||
@@ -70,5 +85,6 @@ module.exports = {
     Group_FormObject:Group_FormObject,
     e404:e404,
     Word_Save:Word_Save,
+    Word_List:Word_List,
 };
     

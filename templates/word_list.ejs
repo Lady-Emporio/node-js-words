@@ -1,0 +1,39 @@
+<!Doctype html>
+<html>
+<head>
+<style>
+table{
+    border: 4px double black; /* Рамка вокруг таблицы */
+    border-collapse: collapse; 
+}
+th { 
+    text-align: left; /* Выравнивание по левому краю */
+    background: #ccc; /* Цвет фона ячеек */
+    padding: 5px; /* Поля вокруг содержимого ячеек */
+    border: 1px solid black; /* Граница вокруг ячеек */
+   }
+   td { 
+    padding: 5px; /* Поля вокруг содержимого ячеек */
+    border: 1px solid black; /* Граница вокруг ячеек */
+   }
+</style>
+</head>
+<body>
+<h1>Word list</h1>
+<form>
+<div class="main">
+        <table>
+            <th>Английское</th>
+            <th>Русское</th>
+<% words.forEach(function(word ) { %>
+            <tr>
+              <td><%=word.eng%></td>
+              <td><%=word.ru%></td>
+            </tr>
+<% }); %>
+</table>
+</div>
+
+</form>
+</body>
+</html>

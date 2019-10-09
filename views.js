@@ -28,10 +28,12 @@ async function Word_FormObject(req, res) {
     });
 }
 async function Word_List(req,res){
+    let id_start=0;
     let text=`
     MATCH (n:Word) RETURN n
     ORDER BY n.eng
-    LIMIT 30
+    SKIP ${id_start} 
+    LIMIT 3
     `
     words=await orm.stuff.cypher(text);
 
@@ -40,7 +42,7 @@ async function Word_List(req,res){
         wordObject=words.records[i].get("n").properties;
         array.push(wordObject);
     }
-    res.render("word_list", {words:array});
+    res.render("word_list", {words:array,id_start:id_start});
 }
 
 async function Word_Save(req,res){
@@ -79,6 +81,27 @@ function e404(req, res) {
     let return_text="Page not found\n"+jsonParams;
     res.end(return_text);
 }
+
+async function getNextWords(req, res){
+    let id_start=req.params.wordStart;
+    if (id_start<=0){
+        id_start=0;
+    }
+    let text=`
+    MATCH (n:Word) RETURN n
+    ORDER BY n.eng
+    SKIP ${id_start} 
+    LIMIT 3
+    `
+    words=await orm.stuff.cypher(text);
+
+    let array=[]
+    for(let i=0; i!=words.records.length;++i){
+        wordObject=words.records[i].get("n").properties;
+        array.push(wordObject);
+    }
+    res.render("word_list", {words:array,id_start:id_start});
+} 
 module.exports = {
     index: index,
     Word_FormObject:Word_FormObject,
@@ -86,5 +109,6 @@ module.exports = {
     e404:e404,
     Word_Save:Word_Save,
     Word_List:Word_List,
+    getNextWords:getNextWords,
 };
     

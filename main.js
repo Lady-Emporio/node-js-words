@@ -7,6 +7,20 @@ const ejs = require('ejs')
 
 
 
+// const Neode = require('neode')
+// const instance = new Neode(ENV.get("neo4j_host"),ENV.get("neo4j_username"),ENV.get("neo4j_password"));
+// const Orm=require('./models');
+// const orm=new Orm(instance);
+
+// for(let i=0;i!=30;++i){
+//     orm.createWord(`eng${i}`,`ru${i}`," "," ");
+// }
+
+
+
+
+
+
 
 var app = express()
 
@@ -47,8 +61,6 @@ const url=new Urls(app);
 
 app.set('views', __dirname + '/templates');
 app.set('view engine', 'ejs');
-
-
 
 
 var listener=app.listen(ENV.get("express_port"),ENV.get("express_host"),

@@ -13,7 +13,8 @@ const ejs = require('ejs')
 // const orm=new Orm(instance);
 
 // for(let i=0;i!=30;++i){
-//     orm.createWord(`eng${i}`,`ru${i}`," "," ");
+//     //orm.createWord(`eng${i}`,`ru${i}`," "," ");
+//     l(orm.createGroup(`group${i}`))
 // }
 
 

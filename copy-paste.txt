@@ -9,6 +9,17 @@ MATCH (n) DETACH DELETE n
 
 //получить по <id>
 MATCH (p:Group) WHERE ID(p)=118 RETURN p
+MATCH (g1:Group),(g2:Group) WHERE ID(g1)=989 and ID(g2)=1009 RETURN g1,g2
+MATCH (g1:Group),(g2:Group) WHERE ID(g1)=989 and ID(g2)=1009 CREATE (g1)-[:PARENT]->(g2) RETURN g1,g2
+
+//Вывести связанные ячейки
+MATCH path = (root:Group)-[r*]->(b) RETURN path
+
+//Вывести зависимые ячейки
+MATCH (g1:Group)-[p:PARENT]->(g2:Group) WHERE ID(g1)=989 RETURN g2,ID(g2)
+
+//Вывести все ячейки без связи
+MATCH (g1:Group) WHERE NOT (g1)<-[:PARENT]-(:Group) RETURN g1
 
 //ссылка на док
 https://neo4j.com/docs/cypher-manual/current/clauses/match/#get-all-nodes

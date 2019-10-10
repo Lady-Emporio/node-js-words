@@ -81,7 +81,16 @@ function e404(req, res) {
     let return_text="Page not found\n"+jsonParams;
     res.end(return_text);
 }
-
+async function Group_list(req,res){
+    let id_start=0;
+    let text=`
+    MATCH (n:Group) RETURN n
+    ORDER BY n.name
+    SKIP ${id_start} 
+    LIMIT 3
+    `
+    res.render("group_list.ejs", {group:array,id_start:id_start});
+}
 async function getNextWords(req, res){
     let id_start=req.params.wordStart;
     if (id_start<=0){
@@ -110,5 +119,6 @@ module.exports = {
     Word_Save:Word_Save,
     Word_List:Word_List,
     getNextWords:getNextWords,
+    Group_list:Group_list,
 };
     

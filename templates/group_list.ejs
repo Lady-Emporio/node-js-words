@@ -1,0 +1,71 @@
+<!Doctype html>
+<html>
+<head>
+  <script>
+    var id_start= <%=id_start%>; 
+  </script>
+<style>
+table{
+    border: 4px double black; /* Рамка вокруг таблицы */
+    border-collapse: collapse; 
+}
+th { 
+    text-align: left; /* Выравнивание по левому краю */
+    background: #ccc; /* Цвет фона ячеек */
+    padding: 5px; /* Поля вокруг содержимого ячеек */
+    border: 1px solid black; /* Граница вокруг ячеек */
+   }
+   td { 
+    padding: 5px; /* Поля вокруг содержимого ячеек */
+    border: 1px solid black; /* Граница вокруг ячеек */
+   }
+</style>
+</head>
+<body>
+<h1>Group list</h1>
+<form>
+<div id="main">
+        <table>
+            <th>parent</th>
+            <th>Наименование</th>
+<% words.forEach(function(word ) { %>
+            <tr>
+              <td><%=word.eng%></td>
+              <td><%=word.ru%></td>
+            </tr>
+<% }); %>
+</table>
+<div>
+  <input type="button" onclick="lastWords()" value="Last...">
+  <input type="button" onclick="nextWords()" value="Next...">
+</div>
+
+</div>
+
+</form>
+
+<script>
+  function lastWords() {
+    var oReq = new XMLHttpRequest();	
+    oReq.onload = reqListener;	
+    --id_start;
+    if(id_start<0){
+      id_start=0;
+    }
+    oReq.open("get", `/ajax_w/${id_start}/`, true);	
+    oReq.send();	
+  }
+
+  function nextWords() {
+    var oReq = new XMLHttpRequest();	
+    oReq.onload = reqListener;	
+    oReq.open("get", `/ajax_w/${++id_start}/`, true);	
+    oReq.send();	
+  }
+  function reqListener () {
+    //document.getElementById('main').innerHTML=this.responseText;
+    document.body.innerHTML=this.responseText;
+  }
+</script>
+</body>
+</html>

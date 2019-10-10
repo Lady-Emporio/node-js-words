@@ -9,6 +9,7 @@ const urls=[
     ["/word/:wordId([0-9]{1,})/",views.Word_FormObject,ReqType.GET],
     ["/word/save/",views.Word_Save,ReqType.POST],
     ["/word/",views.Word_List,ReqType.GET],
+    ["/group/",views.Group_list,ReqType.GET],
     ["/group/:groupId([0-9]{1,})/",views.Group_FormObject,ReqType.ALL],
     ["/ajax_w/:wordStart([0-9]{1,})/",views.getNextWords,ReqType.ALL],
     ["*",views.e404,ReqType.ALL]
